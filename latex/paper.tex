@@ -1,0 +1,186 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{graphicx}
+\usepackage{times}
+
+\begin{document}
+
+\title{Six ways to understand monads\\
+\small{Experiences from the functional programming course at TU Delft}}
+
+\author{\IEEEauthorblockN{Georgios Gousios}
+\IEEEauthorblockA{
+Delft University of Technology\\
+Delft, The Netherlands\\
+Email: G.Gousios@tudelft.nl} 
+\and
+\IEEEauthorblockN{Erik Meijer}
+\IEEEauthorblockA{Microsoft \\
+Rendmond, WA, USA\\
+Email: H.J.M.Meijer@tudelft.nl} 
+}   
+\maketitle
+
+\begin{abstract}
+
+  In the last few years, the popularity of functional programming as a way
+  of solving computational problems has increased significantly. While most
+  computer science curricula do include a course on functional programming,
+  in many cases it is disconnected from practical applications, which is
+  precisely where functional programming shines. To fill in this gap, we 
+  designed a functional programming course that demanded from students to learn
+  by experience with real world applications. In this work, we present our
+  experiences with conducting this course.
+\end{abstract}
+
+\section{Introduction}
+
+Due to a variety of reasons, including the advent of cloud computing, the rising
+rate of information production and the necessity to reach the market fast,
+currently, large corporations and start-ups alike are investigating
+alternative programming and information storage models. As a result, during the
+last few years, the practical software engineering field is witnessing a noticeable shift towards functional programming. Scripting languages,
+notably Javascript and Ruby, pioneered the introduction of functional
+concepts, such as closures and lambda functions, to mainstream programming. A
+new wave of programming languages, developed to overcome the expressiveness and
+complexity limitations exhibited in mainstream languages, have promoted
+functional constructs, such as type safe pattern matching, higher order
+functions and single assignment variables, to first class citizens (Scala). New,
+purely functional, languages have emerged to fill in the remaining gaps (F\#,
+Clojure), often introducing significant advancements in their field of
+specialisation (such as Erlang in distributed fault-tolerant systems). Finally,
+large scale information processing systems such as Map-Reduce and domain
+specific languages such as LINQ have integrated functional concepts to ease the
+expression of computations.
+
+Broadly speaking, functional programming is a style of programming in which the
+primary method of computation is the application of functions to arguments.
+Among other features, functional languages offer a compact notation for writing
+programs, powerful abstraction methods for structuring them, and a simple
+mathematical basis that supports reasoning. Many of the advanced techniques in
+modern functional languages, such as monads and catamorphisms, are closely based
+on principles from category theory such as functors, initial algebras, monads
+and Kleisli categories.
+
+While functional programming has been taught for long in computer science
+departments~\cite{Joost93}, curricula tend to emphasize functional programming theory rather
+than practical applications. Special programming languages are used to teach
+functional programming specific concepts, while little connection is made to how
+those concepts can be transfered to non-functional languages.  The course at TU
+Delft attempted to teach functional programming theory in the classroom and then
+expect students to apply those concepts in the (non-purely functional) language
+of their choice. The course had a very strong teaching by example focus:
+students were expected to participate in both in-classroom exercises, homework
+assignments and implement a real world system as a final project.
+
+\section{The Course}
+
+The aim of the course is to teach the principles of pure functional
+programming, and the corresponding Category theoretical principles, using the
+Haskell programming language. More specifically, the educational purposes
+of the course were:
+
+\begin{itemize}
+
+  \item To introduce students to basic functional programming concepts, such
+    as higher order functions, monads and type inference.
+
+  \item To introduce students to solving data processing problems in a 
+    functional way.
+
+  \item To explain the application of functional concepts in non-purely
+    functional environments.
+
+\end{itemize}
+
+The course consisted of a series of lectures 
+
+\subsection{Student profile}
+
+The course was elective at the MSc curriculum. Students from all departments in
+the Electrical Engineering, Mathematics and Computer science faculty were
+allowed to participate. Most students had received formal introduction to
+imperative and object oriented programming in their bachelors curriculum, while
+through participation to other courses they had limited exposure to functional
+programming (i.e. Map/Reduce in the web information systems course). Two of the
+students were majoring in computer engineering, which meant that their
+programming experience was somewhat limited. Several students also had work
+experience as programmers as part of their industrial placement or through
+participation to start up ventures.
+
+For organizational reasons, the participation to the course was limited to 15
+students.
+
+\subsection{Lectures}
+
+\subsection{Student projects}
+
+At the end of the lecture period, the students were given a selection of
+projects to work on. The projects included:
+
+\begin{itemize}
+
+  \item Real time graph visualisation on steaming data. The
+    particular example that students worked on was visualizing community
+    structures for Github projects.
+
+  \item Multi-source real time data processing. Students worked on a 
+    programming language popularity index 
+
+  \item Implementation of Haskell constructs in Javascript. Students implemented
+    the Haskell prelude (basic functions for list manipulation). 
+
+  \item Implementation of Map/Reduce algorithms in Haskell. Students installed
+    and configured cloud Haskell and implemented simple Map/Reduce based
+    algorithms in a distributed setting.
+
+  \item Machine learning algorithms. Students implemented Na\"ive Bayes 
+    classifiers and K-means clusters.
+
+\end{itemize}
+
+\section{Experiences}
+
+\subsection{Teaching Monads}
+
+\subsection{The teapot experiment}
+
+One of the highlights of the taught period of the course was the teapot
+experiment. While not a formal experiment in the scientific sense of the word,
+we used it to draw the student's attention to the following facts:
+
+\begin{itemize}
+
+  \item Most modern programming languages can express functional programming
+    constructs.
+
+  \item Functional programming works best in data transformation scenarios
+
+\end{itemize}
+
+The exercise consisted of rendering the Utah Teapot~\cite{Torre06} using any
+graphics primitive of the student's choice using only right triangles.  In its
+core, the exercise required students to decompose arbitrary triangles, which
+comprised the input Utah Teapot model, to a series right triangles.  The
+students had to come up with the decomposition method (using some form of
+analytic geometry), a decomposition restriction criterion to stop the
+decomposition when triangles could not be rendered on screen and a method to
+recursively apply the above mentioned transformations on the input data. As
+always the students could decide the implementation language of their choice.
+
+The students' response to the exercise was overwhelming. For four days,
+the students worked hard to 
+
+\subsection{Teaching Map/Reduce}
+
+\subsection{Student Projects}
+
+\section{Conclusion}
+
+\section*{Acknowledgements}
+
+We would like to thank\ldots
+
+\bibliography{paper}
+\bibliographystyle{ieeetr}
+\end{document}
+
