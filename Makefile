@@ -89,6 +89,7 @@ $(BUILD):
 
 $(TEXFILES_DEST) : $(TEXFILES_SRC) $(BUILD)
 	cp $(LATEXDIR)/$(@F) $@
+	cp $(LATEXDIR)/*.bib $(BUILD)
 
 $(PICTURES_DEST): $(PICTURES_SRC) $(BUILD)
 	cp $(PICS)/$(@F) $@
@@ -102,8 +103,8 @@ $(BUILD)/$(MASTERTEX).aux: $(TEXFILES_DEST) $(PICTURES_DEST)
 
 # Bibliography
 $(BUILD)/$(MASTERTEX).bib: $(BUILD)/$(MASTERTEX).aux
-	cd $(BUILD) && \
-	$(PYBCOMPACT) $(MASTERTEX).aux $(PAPERPATH) > `basename $(BUILD)/$(MASTERTEX).bib`
+#	cd $(BUILD) && \
+#	$(PYBCOMPACT) $(MASTERTEX).aux $(PAPERPATH) > `basename $(BUILD)/$(MASTERTEX).bib`
 
 $(BUILD)/$(MASTERTEX).bbl: $(BUILD)/$(MASTERTEX).bib $(BUILD)/$(MASTERTEX).aux
 	cd $(BUILD) && \
