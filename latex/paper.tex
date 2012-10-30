@@ -2,6 +2,7 @@
 \usepackage{graphicx}
 \usepackage{times}
 \usepackage{subfigure}
+\usepackage{url}
 
 \begin{document}
 
@@ -81,7 +82,7 @@ project.
 While planning the course, we dealt with the following challenges related
 to the course's organization and content.
 
-\subsection{Heterogeneous Background of participants}
+\subsection{Heterogeneous background of participants}
 
 The functional programming course is elective at the MSc curriculum. Students
 from all departments in the Electrical Engineering, Mathematics and Computer
@@ -100,7 +101,10 @@ experience as programmers as part of their industrial placement or through
 participation to start up ventures.
 
 The expected diverse backgrounds of the students guaranteed that no generic
-introduction to the topic would be sufficient. While the  
+introduction to the topic would be sufficient. For this reason, we decided
+to adopt a hands-on-first approach; the students would have to learn by
+flexing their programming muscles, instead of being gently introduced to 
+the theory through toy examples.
 
 \subsection{Choosing the appropriate topics}
 
@@ -120,6 +124,27 @@ processing, transformations and state representation using functional techniques
 
 \subsection{Choosing the appropriate programming language}
 
+Programming languages, in addition to enabling the programmer to express a
+series of instructions to be executed by a computer, affect the programmer's
+tough process and consequently her approach towards problem
+solving~\cite{Ivers80}.  When teaching a programming course, it is important to
+be able to demonstrate concepts without interference by the chosen language's
+syntax. However, a non-practical language might have the opposite effect; our
+experience has shown that the further a demonstration language is from practical
+application, the less important student feel the taught concepts are.
+Fortunately, most functional programming concepts can be expressed cleanly by
+several widespread languages: for example, Javascript, Ruby and {\sc c\#} have
+closures, first class and higher order functions, while a number of emerging
+languages, such as Scala, {\sc f\#} and Clojure are functional languages working
+on familiar development platforms. Apart from staying compatible with the
+existing literature, there is no practical reason that necessitates teaching of
+functional programming strictly in a language like Haskell or {\sc ml}.
+
+The above led us to not choose any particular language for the course. 
+During the lectures, the demonstration languages would be Haskell and
+{\sc c\#}. We actively encouraged students to use the language of their
+choice on the platform of their choice to carry out homework assignments
+and the course's final project.
 
 \section{The Course}
 
@@ -187,9 +212,9 @@ demo by the end of the course time.
 
 \subsection{The labs}
 
-
-
 \section{Experiences}
+
+
 
 \subsection{Teaching Monads}
 
@@ -211,16 +236,18 @@ we used it to draw the student's attention to the following facts:
 The exercise consisted of rendering the Utah Teapot~\cite{Torre06} using any
 graphics primitive of the student's choice using only right triangles.  In its
 core, the exercise required students to decompose arbitrary triangles, which
-comprised the input Utah Teapot model, to a series right triangles. The
-students had to come up with the decomposition method (using some form of
-analytic geometry), a decomposition restriction criterion to stop the
-decomposition when triangles could not be rendered on screen and a method to
-recursively apply the above mentioned transformations on the input data. As
-always the students could decide the implementation language of their choice.
+comprised the input Utah Teapot model, to a series right triangles. The students
+had to come up with the decomposition method (using some form of analytic
+geometry), a decomposition restriction criterion to stop the decomposition when
+triangles could not be rendered on screen and a method to recursively apply the
+above mentioned transformations on the input data. As always, the students could
+decide the implementation language of their choice. The exercise was given as a
+mid-week homework assignment, between the Monday and the Friday lectures.
 
 \begin{figure*}
 \centering
-\subfigure[Reference, rendered with Java graphics]{
+\label{fig:teapots}
+\subfigure[Input drawing, rendered with Java graphics]{
 \includegraphics[scale=0.173]{teapot-reference.png}
 \label{fig:teapot-reference}
 }
@@ -237,12 +264,19 @@ elements]{
 \includegraphics[scale=0.31]{teapot-html-canvas.png}
 \label{fig:teapot-html-canvas}
 }
-\label{fig:proj}
-\caption[]{Example results from the teapot experiment.}
+\caption[]{Example results from the teapot exercise.}
 \end{figure*}
 
-The students' response to the exercise was overwhelming. For four days,
-the students worked hard to 
+The student's response was overwhelming. Even though it was made clear that
+the exercise would not contribute to the final grade, the will to apply the
+data processing techniques taught during the lectures motivated
+the students to work very hard. The fact that they were instructed to use
+their favourite language enabled them to focus on decomposing the problem 
+in a series of testable calculation steps rather than meddling with the
+intricacies of a pure functional language. Solutions where provided in
+Scala, {\sc c\#}, Scheme, Javascript and Haskell. 
+Example renderings produced by student programs can be seen in 
+Figure~\ref{fig:teapots}.
 
 \subsection{Teaching Map/Reduce}
 
@@ -269,7 +303,8 @@ understand the concepts that were taught during the course.
 \section*{Acknowledgements and Availability}
 
 We would like to thank the course participants for their enthusiasm and
-dedication. 
+dedication. The source code to all student projects and the teapot
+exercise can be found at (or linked from) \url{https://github.com/gousiosg/teapots}. 
 
 \bibliography{paper}
 \bibliographystyle{ieeetr}
