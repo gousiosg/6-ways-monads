@@ -1,6 +1,7 @@
 \documentclass[conference]{IEEEtran}
 \usepackage{graphicx}
 \usepackage{times}
+\usepackage{subfigure}
 
 \begin{document}
 
@@ -210,12 +211,35 @@ we used it to draw the student's attention to the following facts:
 The exercise consisted of rendering the Utah Teapot~\cite{Torre06} using any
 graphics primitive of the student's choice using only right triangles.  In its
 core, the exercise required students to decompose arbitrary triangles, which
-comprised the input Utah Teapot model, to a series right triangles.  The
+comprised the input Utah Teapot model, to a series right triangles. The
 students had to come up with the decomposition method (using some form of
 analytic geometry), a decomposition restriction criterion to stop the
 decomposition when triangles could not be rendered on screen and a method to
 recursively apply the above mentioned transformations on the input data. As
 always the students could decide the implementation language of their choice.
+
+\begin{figure*}
+\centering
+\subfigure[Reference, rendered with Java graphics]{
+\includegraphics[scale=0.173]{teapot-reference.png}
+\label{fig:teapot-reference}
+}
+\subfigure[Decomposition in Scala, rendered with Java graphics]{
+\includegraphics[scale=0.17]{teapot-java-canvas.png}
+\label{fig:teapot-scala}
+}
+\subfigure[Decomposition in Scheme, rendered with appropriately positioned {\sc html} \textsf{div}
+elements]{
+\includegraphics[scale=0.2]{teapot-html-divs.png}
+\label{fig:teapot-html-divs}
+}
+\subfigure[Decomposition in Javascript, rendered with {\sc html5} graphics]{
+\includegraphics[scale=0.31]{teapot-html-canvas.png}
+\label{fig:teapot-html-canvas}
+}
+\label{fig:proj}
+\caption[]{Example results from the teapot experiment.}
+\end{figure*}
 
 The students' response to the exercise was overwhelming. For four days,
 the students worked hard to 
@@ -242,10 +266,10 @@ believe that it was the hands-on approach through tough homework exercises
 employed in this course that allowed students to sharpen their skills and
 understand the concepts that were taught during the course.
 
-\section*{Acknowledgements}
+\section*{Acknowledgements and Availability}
 
 We would like to thank the course participants for their enthusiasm and
-dedication.
+dedication. 
 
 \bibliography{paper}
 \bibliographystyle{ieeetr}

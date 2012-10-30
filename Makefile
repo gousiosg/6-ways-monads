@@ -12,6 +12,9 @@ BUILD=build
 # Where is the latex input dir
 LATEXDIR=latex
 
+# Directory that stores figures
+PICS:=figs
+
 # Where should biblio.py look for papers
 PAPERPATH=~/Documents/biblists
 
@@ -60,6 +63,9 @@ $(PLOT_PDFS) : $(PLOT_SRC_FILES) $(PLOT_DATA_FILES)
 
 # Files for figures, in PDF format
 PDFFILES := $(foreach dir,$(PICS),$(wildcard $(dir)/*.pdf))
+
+# Files for figures, PNG format
+PNGFILES := $(foreach dir,$(PICS),$(wildcard $(dir)/*.png))
 
 # Figure names in build dir
 PICTURES_SRC := $(EPSFILES_PDF) $(PLOT_PDFS)
