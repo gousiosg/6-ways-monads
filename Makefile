@@ -40,15 +40,16 @@ PYBCOMPACT?=../bin/pybcompact.py
 # Output file
 PDFFILE=$(patsubst %.tex,%.pdf,${TEXFILE})
 
-# Latex files in output directory
-TEXFILES_SRC:=$(wildcard $(LATEXDIR)/*.tex) $(wildcard $(LATEXDIR)/*.cls) $(wildcard $(LATEXDIR)/*.bst)
+# Latex files in build directory
+TEXFILES_SRC:=$(wildcard $(LATEXDIR)/*.tex) $(wildcard $(LATEXDIR)/*.cls) $(wildcard $(LATEXDIR)/*.bst) 
 TEXFILES_DEST := $(addprefix $(BUILD)/, $(notdir $(TEXFILES_SRC)))
 
 # Bib file
-BIB=$(patsubst %.tex,%,${TEXFILE})
+BIBFILE=$(patsubst %, %.bib, $(MASTERTEX))
+BIBFILE_DEST=$(addprefix $(BUILD)/, $(notdir $(BIBFILE)))
 
 # Latex aux file
-AUXFILE=$(patsubst %.tex,%.aux,${TEXFILE})
+AUXFILE=$(patsubst %.tex,%.aux,${MASTERTEX})
 
 # Files for figures, in EPS format
 EPSFILES :=	$(foreach dir,$(PICS),$(wildcard $(dir)/*.eps))
@@ -95,7 +96,6 @@ $(BUILD):
 
 $(TEXFILES_DEST) : $(TEXFILES_SRC) $(BUILD)
 	cp $(LATEXDIR)/$(@F) $@
-	cp $(LATEXDIR)/*.bib $(BUILD)
 
 $(PICTURES_DEST): $(PICTURES_SRC) $(BUILD)
 	cp $(PICS)/$(@F) $@
@@ -107,10 +107,14 @@ $(BUILD)/$(MASTERTEX).aux: $(TEXFILES_DEST) $(PICTURES_DEST)
 	cd $(BUILD) && \
 	$(LATEX) $(MASTERTEX).tex 
 
-# Bibliography
-$(BUILD)/$(MASTERTEX).bib: $(BUILD)/$(MASTERTEX).aux
-#	cd $(BUILD) && \
-#	$(PYBCOMPACT) $(MASTERTEX).aux $(PAPERPATH) > `basename $(BUILD)/$(MASTERTEX).bib`
+# Bibfile: copy from src dir if exists, otherwise call pybcompact
+$(BIBFILE_DEST): $(BUILD)/$(MASTERTEX).aux
+ifeq ($(wildcard $(LATEXDIR)/*.bib),)
+	cd $(BUILD) && \
+		$(PYBCOMPACT) $(MASTERTEX).aux $(PAPERPATH) > `basename $(BUILD)/$(MASTERTEX).bib`
+else
+	cp $(LATEXDIR)/$(@F) $@
+endif
 
 $(BUILD)/$(MASTERTEX).bbl: $(BUILD)/$(MASTERTEX).bib $(BUILD)/$(MASTERTEX).aux
 	cd $(BUILD) && \

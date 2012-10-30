@@ -15,10 +15,8 @@
 \IEEEauthorblockA{
 Delft University of Technology\\
 Delft, The Netherlands\\
-Email: {H.J.M.Meijer, G.Gousios, Arie.vanDeursen@tudelft.nl} 
+Email: {H.J.M.Meijer, G.Gousios@tudelft.nl} 
 }  
-\and
-\IEEEauthorblockN{Arie van Deursen}
 }
 \maketitle
 
@@ -148,10 +146,9 @@ and the course's final project.
 
 \section{The Course}
 
-The aim of the course is to teach the principles of pure functional
-programming, and the corresponding Category theoretical principles, using the
-Haskell programming language. More specifically, the educational purposes
-of the course were:
+The aim of the course was to teach the principles of pure functional
+programming, and the corresponding Category theoretical principles. 
+More specifically, the educational purposes of the course were:
 
 \begin{itemize}
 
@@ -164,16 +161,45 @@ of the course were:
   \item To explain the application of functional concepts in non-purely
     functional environments.
 
+  \item To 
+
 \end{itemize}
 
 The course consisted of a series of lectures, of which two where invited
-lectures by an external instructor, laboratories, a series of intermediate
-assignments and a final assignment. The students would be evaluated by their
-performance on the final assignment only. 
+lectures by an external instructor, and laboratory sessions. In total, the
+course consisted of 14 hours of lectures and 8 hours of lab work.
+The students
+also had to carry out a series of intermediate assignments and a final project.
+The students would be evaluated by their performance on the final assignment. 
+The lectures took place in a quarter (half semester), during 3 intense 
+weeks; the students had another 6 weeks to finish their final projects.
 
 \subsection{Lectures}
 
-\cite{Hutto07}
+The lectures covered the following topics:
+
+\begin{itemize}
+
+  \item Functions and functional composition, higher order functions, recursive
+    functions, avoiding recursion
+
+  \item Basic types, function types, currying
+
+  \item Lists, mapping and traversal using folds
+
+  \item Monads, composition and their application on the {\sc linq} query 
+    language~\cite{Meije11}
+
+  \item Monoids, functors and their application on data structure processing
+
+  \item Functional formalization of the Map/Reduce data processing
+    paradigm~\cite{Lamme08}
+
+\end{itemize}
+
+The lecture material was loosely based on Graham Hutton's functional programming
+course at the University of Nottingham. The course's recommended book was
+Programming in Haskell by the same author~\cite{Hutto07}.
 
 \subsection{Student projects}
 
@@ -210,15 +236,46 @@ with the source code and short report describing the solution that the
 students came up with. The students were also required to have a working
 demo by the end of the course time.
 
-\subsection{The labs}
+\subsection{Labs}
+
+The purpose of the lab sessions where to help students carry out their final
+assignments and explain better concepts that might not be clear to students. 
+Students convened every week, presented their progress and discussed with 
+each other and with the lab demonstrator design and practical issues that
+arised in the implementation of their projects. To further motivate students
+to work on their projects, one of the lab sessions was converted to a full
+day coding sprint.
 
 \section{Experiences}
 
+\subsection{Teaching by example}
 
 
-\subsection{Teaching Monads}
 
 \subsection{The teapot experiment}
+
+\begin{figure*}
+\centering
+\label{fig:teapots}
+\subfigure[Input drawing, rendered with Java graphics]{
+\includegraphics[scale=0.173]{teapot-reference.png}
+\label{fig:teapot-reference}
+}
+\subfigure[Decomposition in Scala, rendered with Java graphics]{
+\includegraphics[scale=0.17]{teapot-java-canvas.png}
+\label{fig:teapot-scala}
+}
+\subfigure[Decomposition in Scheme, rendered with appropriately positioned {\sc html} \textsf{div}
+elements]{
+\includegraphics[scale=0.2]{teapot-html-divs.png}
+\label{fig:teapot-html-divs}
+}
+\subfigure[Decomposition in Javascript, rendered with {\sc html5} graphics]{
+\includegraphics[scale=0.31]{teapot-html-canvas.png}
+\label{fig:teapot-html-canvas}
+}
+\caption[]{Example results from the teapot exercise.}
+\end{figure*}
 
 One of the highlights of the taught period of the course was the teapot
 experiment. While not a formal experiment in the scientific sense of the word,
@@ -244,29 +301,6 @@ above mentioned transformations on the input data. As always, the students could
 decide the implementation language of their choice. The exercise was given as a
 mid-week homework assignment, between the Monday and the Friday lectures.
 
-\begin{figure*}
-\centering
-\label{fig:teapots}
-\subfigure[Input drawing, rendered with Java graphics]{
-\includegraphics[scale=0.173]{teapot-reference.png}
-\label{fig:teapot-reference}
-}
-\subfigure[Decomposition in Scala, rendered with Java graphics]{
-\includegraphics[scale=0.17]{teapot-java-canvas.png}
-\label{fig:teapot-scala}
-}
-\subfigure[Decomposition in Scheme, rendered with appropriately positioned {\sc html} \textsf{div}
-elements]{
-\includegraphics[scale=0.2]{teapot-html-divs.png}
-\label{fig:teapot-html-divs}
-}
-\subfigure[Decomposition in Javascript, rendered with {\sc html5} graphics]{
-\includegraphics[scale=0.31]{teapot-html-canvas.png}
-\label{fig:teapot-html-canvas}
-}
-\caption[]{Example results from the teapot exercise.}
-\end{figure*}
-
 The student's response was overwhelming. Even though it was made clear that
 the exercise would not contribute to the final grade, the will to apply the
 data processing techniques taught during the lectures motivated
@@ -279,6 +313,15 @@ Example renderings produced by student programs can be seen in
 Figure~\ref{fig:teapots}.
 
 \subsection{Teaching Map/Reduce}
+
+ 
+
+\subsection{The coding sprint day}
+
+Coding sprints or ``hackathons'' have long been used by open source software
+projects to speed up development and increase participation of community
+members~\cite{Adams11}. In a typical sprint, project members set measurable
+targets and work intensively to 
 
 
 
