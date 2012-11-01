@@ -70,7 +70,7 @@ departments~\cite{Joost93}, curricula tend to emphasize functional programming
 theory rather than practical applications. Special programming languages are
 used to teach functional programming specific concepts, while little connection
 is made to how those concepts can be transfered to non-functional languages.
-The course at TU Delft attempted to teach functional programming theory in the
+The course at TU Delft attempted to teach functional programming principles in the
 classroom and then expect students to apply those concepts in the (non-purely
 functional) language of their choice. The course had a very strong teaching by
 example focus: students were expected to participate in both in-classroom
@@ -235,7 +235,7 @@ projects to work on. The projects included:
 The assignments were open ended, as there was no fixed set of targets for
 each one of them. The deliverables for the assignments were a repository
 with the source code and short report describing the solution that the
-students came up with. The students were also required to have a working
+students came up with. The students were also required to present a working
 demo by the end of the course time.
 
 \subsection{Labs}
@@ -251,6 +251,18 @@ day coding sprint.
 \section{Experiences}
 
 \subsection{Teaching by example}
+
+The focus of teaching was to present functional programming from a 
+practical aspect. 
+
+The proverbial ``six ways to understand monads'' included presentations of the
+formal theoretical concepts, visualizations of monads as blenders (based on the
+monadic property that once a value is captured, it is then contained),
+applications in Haskell for encapsulating state (through the \textsf{Maybe}
+monad), applications to generic programming in {\sc c\#}, applications to {\sc
+linq} and the reactive extensions framework, and, finally, a whiteboard exercise
+where students where prompted to participate to the specification of Haskell's
+\textsf{IO} monad from basic principles.
 
 
 
@@ -303,31 +315,51 @@ above mentioned transformations on the input data. As always, the students could
 decide the implementation language of their choice. The exercise was given as a
 mid-week homework assignment, between the Monday and the Friday lectures.
 
-The student's response was overwhelming. Even though it was made clear that
-the exercise would not contribute to the final grade, the will to apply the
-data processing techniques taught during the lectures motivated
-the students to work very hard. The fact that they were instructed to use
-their favourite language enabled them to focus on decomposing the problem 
-in a series of testable calculation steps rather than meddling with the
-intricacies of a pure functional language. Solutions where provided in
-Scala, {\sc c\#}, Scheme, Javascript and Haskell. 
-Example renderings produced by student programs can be seen in 
-Figure~\ref{fig:teapots}.
+The student's response was overwhelming. Even though it was made clear that the
+exercise would not contribute to the final grade, the will to apply the data
+processing techniques taught during the lectures motivated the students to work
+very hard. The fact that they were instructed to use their favourite language
+enabled them to focus on decomposing the problem in a series of testable
+calculation steps rather than meddling with the intricacies of a pure functional
+language.  Despite the advice, students were eager to test-drive the newly
+acquired knowledge in a functional language; apart from {\sc c\#} and
+Javascript, solutions were also provided in Scala, Scheme and Haskell. Example
+renderings produced by student programs can be seen in Figure~\ref{fig:teapots}.
 
 \subsection{Teaching Map/Reduce}
 
- 
+According to many students, the Map/Reduce data analysis framework was what
+drove them to attend the course. During the course, several examples
+where presented 
+
+The result was that in their projects, students used implicit, through
+the selected language's library collection methods, or explicit, by
+formalizing data processing as a series of in memory Map/Reduce operations, forms
+of Map/Reduce to process the data. 
+
+Out of personal interest, one student even implemented L\"ammel Map/Reduce
+formulation in Scala, and through the language's extension mechanisms,
+adapted it for use as an extension method by any Scala collection type,
+including parallel collections.
 
 \subsection{The coding sprint day}
 
 Coding sprints or ``hackathons'' have long been used by open source software
 projects to speed up development and increase participation of community
 members~\cite{Adams11}. In a typical sprint, project members set measurable
-targets and work intensively to 
+targets and work intensively in a tight deadline to deliver them. To ensure
+the timely delivery of the student projects, we organized an one day
+coding sprint, during the students where request to i) set an explicit target 
+ii) write code for 7 hours with a short break iii) present a 5 minute 
+demo of their work at the end of the day. All project teams where expected to
+work in the same room, while communication among the teams was facilitated
+by the lab demonstrator, to avoid unecessary distractions.
 
 
 
 \subsection{Student Projects}
+
+As expected, the performance of students in project varied. 
 
 \section{Conclusion}
 
