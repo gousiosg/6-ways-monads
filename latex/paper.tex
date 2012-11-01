@@ -49,13 +49,13 @@ lambda functions, to mainstream programming. A new wave of programming
 languages, developed to overcome the expressiveness and complexity limitations
 exhibited in mainstream languages, have promoted functional constructs, such as
 type safe pattern matching, higher order functions and single assignment
-variables, to first class citizens (Scala).  New, purely functional, languages
-have emerged to fill in the remaining gaps (F\#, Clojure), often introducing
-significant advancements in their field of specialisation (such as Erlang in
-distributed fault-tolerant systems).  Finally, large scale information
-processing systems such as Map/Reduce~\cite{Dean04} and domain specific
-languages such as {\sc linq} have integrated functional concepts to ease the
-expression of computations.
+variables, to first class citizens (Scala, {\sc c\#}).  New, functional
+languages have emerged to fill in the remaining gaps (F\#, Clojure, Racket),
+often introducing significant advancements in their field of specialisation
+(such as Erlang in distributed fault-tolerant systems).  Finally, large scale
+information processing systems such as Map/Reduce~\cite{Dean04} and domain
+specific languages such as {\sc linq} have integrated functional concepts to
+ease the expression of masively parallel computations.
 
 Broadly speaking, functional programming is a style of programming in which the
 primary method of computation is the application of functions to arguments.
@@ -109,7 +109,7 @@ the theory through toy examples.
 
 \subsection{Choosing the appropriate topics}
 
-Functional programming is arguably the oldest programming paradigm. In it is
+Functional programming is arguably one of the oldest programming paradigms. In it is
 purest form, it is based on a minimalistic theoretical background
 ($\lambda$-calculus~\cite{Baren84}). Relatively recent
 formulations~\cite{Meije91, Wadle93} also introduced concepts from category
@@ -133,15 +133,14 @@ solving~\cite{Ivers80}.  When teaching a programming course, it is important to
 be able to demonstrate concepts without interference by the chosen language's
 syntax. However, a non-practical language might have the opposite effect; our
 experience has shown that the further a demonstration language is from practical
-application, the less important student feel the taught concepts are.
+application, the less important students feel the taught concepts are.
 Fortunately, most functional programming concepts can be expressed cleanly by
 several widespread languages: for example, Javascript, Ruby and {\sc c\#} have
 closures, first class and higher order functions, while a number of emerging
-languages, such as Scala, {\sc f\#} and Clojure are functional languages
+languages, such as Scala, Racket, {\sc f\#} and Clojure are functional languages
 implemented on familiar development platforms. Apart from staying compatible
 with the existing literature, there is no practical reason that necessitates
-teaching of functional programming strictly in a language like Haskell or {\sc
-ml}.
+teaching strictly in a language like Haskell or {\sc ml}.
 
 The above led us to not choose any particular language for the course.  During
 the lectures, the demonstration languages where Haskell and {\sc c\#}, while at
@@ -173,7 +172,7 @@ lectures by an external instructor, and laboratory sessions. In total, the
 course consisted of 14 hours of lectures and 8 hours of lab work.
 The students
 also had to carry out a series of homework assignments and a final project.
-The students would be evaluated by their performance on the final assignment. 
+The evaluation would be based on student performance on the final assignment. 
 The lectures took place in a quarter (half semester), during 3 intense 
 weeks; the students had another 6 weeks to finish their final projects.
 
@@ -183,20 +182,20 @@ The lectures covered the following topics:
 
 \begin{itemize}
 
-  \item Functions and functional composition, higher order functions, recursive
-    functions, avoiding recursion
+  \item Functions and functional composition, higher order functions, recursion, 
+    avoiding recursion via higher order functions.
 
-  \item Basic types, function types, currying
+  \item Basic types, function types, currying.
 
-  \item Lists, mapping and traversal using folds
+  \item Lists, mapping and traversal using folds.
 
   \item Monads, composition and their application on the {\sc linq} query 
-    language~\cite{Meije11}
+    language~\cite{Meije11}.
 
-  \item Monoids, functors and their application on data structure processing
+  \item Monoids, functors and their application on data structure processing.
 
   \item Functional formalization of the Map/Reduce data processing
-    paradigm~\cite{Lamme08}
+    paradigm~\cite{Lamme08}.
 
 \end{itemize}
 
@@ -324,17 +323,20 @@ facts:
   \item Most modern programming languages can express functional programming
     constructs.
 
-  \item Functional programming works best in data transformation scenarios
+  \item Functional programming works best in data transformation scenarios.
+
+  \item Complex problems can be solved by decomposing them into smaller and simpler ones.
 
 \end{itemize}
 
 The exercise consisted of rendering the Utah Teapot~\cite{Torre06} using any
-graphics primitive of the student's choice using only right triangles.  In its
-core, the exercise required students to decompose arbitrary triangles, which
-comprised the input Utah Teapot model, to a series right triangles. The students
-had to come up with the decomposition method (using an analytic geometry
-method), a decomposition termination criterion to stop the decomposition when
-triangles are too small to be rendered on screen and a method to recursively
+graphics primitive of the student's choice using only right triangles (with one
+horizontal leg).  In its
+core, the exercise required students to decompose a collection of arbitrary triangles, which
+comprised the input Utah Teapot model, to a collection of right triangles. The students
+had to come up with the decomposition method (using some simple analytic
+geometry, this was not a course on 3D graphics), a decomposition termination criterion to stop the decomposition when
+triangles were too small to be rendered on screen and a method to recursively
 apply the above mentioned transformations on the input data. As always, the
 students could decide the implementation language of their choice. The exercise
 was given as a mid-week homework assignment, between the Monday and the Friday
