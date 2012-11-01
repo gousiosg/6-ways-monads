@@ -140,10 +140,10 @@ on familiar development platforms. Apart from staying compatible with the
 existing literature, there is no practical reason that necessitates teaching of
 functional programming strictly in a language like Haskell or {\sc ml}.
 
-The above led us to not choose any particular language for the course. 
-During the lectures, the demonstration languages would be Haskell and
-{\sc c\#}. We actively encouraged students to use the language of their
-choice on the platform of their choice to carry out homework assignments
+The above led us to not choose any particular language for the course.  During
+the lectures, the demonstration languages where Haskell and {\sc c\#}, while at
+the labs we used Scala. We actively encouraged students to use the language of
+their choice on the platform of their choice to carry out homework assignments
 and the course's final project.
 
 \section{The Course}
@@ -252,21 +252,41 @@ day coding sprint.
 
 \subsection{Teaching by example}
 
-The focus of teaching was to present functional programming from a 
-practical aspect. 
+The focus of teaching was to present functional programming from a practical
+aspect; we were mostly interested to teach students what they can do rather than
+the theory behind functional constructs. An important distinction
+that was made early on was that the every day world is imperative; therefore
+while functional programming can be a great tool for thinking about a problem, a
+pure functional solution cannot reflect on the real world. As a consequence it
+is usually best to mix programming paradigms, i.e. imperative or object-oriented
+programming for state representation and functional programming for data
+processing. In our experience, this distinction helped students understand
+that they are already doing functional programming without noticing;
+enforcing data immutability to handle multi-threading problems or passing
+function arguments in scripting languages are applications of functional
+programming principles. The moment students realized this fact, their
+attention was captured to the lectures.
+
+During both lectures and labs, all non-whiteboard examples where actually
+entered in a real programming environment (LinqPad or the Scala command-line
+read-evaluate loop) and the results of the evaluation where discussed with the
+students. Participation was encouraged by modifying the examples and asking the
+students to perform the evaluation, before the example was executed. The
+examples varied from list manipulation with higher-order functions to 
+a toy actor model example.
 
 The proverbial ``six ways to understand monads'' included presentations of the
 formal theoretical concepts, visualizations of monads as blenders (based on the
 monadic property that once a value is captured, it is then contained),
 applications in Haskell for encapsulating state (through the \textsf{Maybe}
 monad), applications to generic programming in {\sc c\#}, applications to {\sc
-linq} and the reactive extensions framework, and, finally, a whiteboard exercise
-where students where prompted to participate to the specification of Haskell's
-\textsf{IO} monad from basic principles.
+linq} and the reactive extensions frameworks, and, finally, a whiteboard
+exercise where students were prompted to participate in the ad-hoc specification
+of Haskell's \textsf{IO} monad from basic principles. Once again, the examples
+enabled the students to understand the composition and state containment
+properties of an otherwise difficult to comprehend theoretical concept.
 
-
-
-\subsection{The teapot experiment}
+\subsection{The teapot exercise}
 
 \begin{figure*}
 \centering
@@ -292,7 +312,7 @@ elements]{
 \end{figure*}
 
 One of the highlights of the taught period of the course was the teapot
-experiment. While not a formal experiment in the scientific sense of the word,
+exercise, which 
 we used it to draw the student's attention to the following facts:
 
 \begin{itemize}
@@ -321,26 +341,25 @@ processing techniques taught during the lectures motivated the students to work
 very hard. The fact that they were instructed to use their favourite language
 enabled them to focus on decomposing the problem in a series of testable
 calculation steps rather than meddling with the intricacies of a pure functional
-language.  Despite the advice, students were eager to test-drive the newly
+language. In spite of the advice, students were eager to test-drive the newly
 acquired knowledge in a functional language; apart from {\sc c\#} and
 Javascript, solutions were also provided in Scala, Scheme and Haskell. Example
 renderings produced by student programs can be seen in Figure~\ref{fig:teapots}.
 
-\subsection{Teaching Map/Reduce}
+\subsection{Map/Reduce}
 
 According to many students, the Map/Reduce data analysis framework was what
-drove them to attend the course. During the course, several examples
-where presented 
-
-The result was that in their projects, students used implicit, through
-the selected language's library collection methods, or explicit, by
-formalizing data processing as a series of in memory Map/Reduce operations, forms
-of Map/Reduce to process the data. 
-
+drove them to attend the course. The lecture on Map/Reduce featured an invited
+talk by Ralf L\"ammel, who presented his formulation of Map/Reduce using
+functional programming principles~\cite{Lamme08} and explained how those can be
+applied to process semi-structured data. The talk resonated to students; in
+their projects, students used implicit, through the selected language's library
+collection methods, or explicit, by formalizing data processing as a series of
+in memory Map/Reduce operations, forms of Map/Reduce to process their datasets.
 Out of personal interest, one student even implemented L\"ammel Map/Reduce
-formulation in Scala, and through the language's extension mechanisms,
-adapted it for use as an extension method by any Scala collection type,
-including parallel collections.
+formulation in Scala, and through the language's extension mechanisms, adapted
+it for use as an extension method by any Scala collection type, including
+parallel collections. 
 
 \subsection{The coding sprint day}
 
@@ -353,13 +372,13 @@ coding sprint, during the students where request to i) set an explicit target
 ii) write code for 7 hours with a short break iii) present a 5 minute 
 demo of their work at the end of the day. All project teams where expected to
 work in the same room, while communication among the teams was facilitated
-by the lab demonstrator, to avoid unecessary distractions.
+by the lab demonstrator, to avoid unnecessary distractions.
 
+The sprint helped students kick start their projects.  
 
+\subsection{The student projects}
 
-\subsection{Student Projects}
-
-As expected, the performance of students in project varied. 
+As expected, the performance of students in their projects varied.
 
 \section{Conclusion}
 
@@ -381,7 +400,7 @@ understand the concepts that were taught during the course.
 
 We would like to thank the course participants for their enthusiasm and
 dedication. The source code to all student projects and the teapot
-exercise can be found at (or linked from) \url{https://github.com/gousiosg/teapots}. 
+exercise can be found at (or linked from) \url{http://swerl.tudelft.nl/bin/view/Main/FunctionalProgrammingCourse}. 
 
 \bibliography{paper}
 \bibliographystyle{ieeetr}
