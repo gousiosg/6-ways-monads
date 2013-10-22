@@ -1,40 +1,61 @@
-\documentclass[conference]{IEEEtran}
+\documentclass[conference]{sig-alternate}
 \usepackage{graphicx}
 \usepackage{times}
 \usepackage{subfigure}
-\usepackage{url}
+\usepackage{hyperref}
 
 \begin{document}
 
-\title{Six ways to understand monads\\
-\small{Experiences from the functional programming course at TU Delft}}
 
-\author{\IEEEauthorblockN{Erik Meijer and Georgios Gousios}
-\IEEEauthorblockA{
-Software Engineering Research Group\\
-Delft University of Technology\\
-Delft, The Netherlands\\
-Email: \{h.j.m.meijer, g.gousios\}@tudelft.nl
+%\author{\IEEEauthorblockN{Erik Meijer and Georgios Gousios}
+%\IEEEauthorblockA{
+%Software Engineering Research Group\\
+%Delft University of Technology\\
+%Delft, The Netherlands\\
+%Email: \{h.j.m.meijer, g.gousios\}@tudelft.nl
+%}
+%}
+
+\title{Teaching Applied Functional Programming\\
+\small{Experiences from the functional programming course at TU Delft}
 }
+
+\numberofauthors{2}
+
+\author{
+\alignauthor
+Erik Meijer\\
+       \affaddr{Delft University of Technology}\\
+       \affaddr{Delft, The Netherlands}\\
+       \email{h.j.m.meijer@tudelft.nl}
+\alignauthor
+Georgios Gousios\\
+       \affaddr{Delft University of Technology}\\
+       \affaddr{Delft, The Netherlands}\\       
+       \email{g.gousios@tudelft.nl}
 }
+
 \maketitle
 
 \begin{abstract}
 
-  In the last few years, the popularity of functional programming as a way of
+  Recently, the popularity of functional programming as a way of
   solving computational problems has increased significantly. While most
   computer science curricula do include a course on functional programming, in
   many cases it is disconnected from practical applications, which is
   precisely where functional programming shines. To fill in this gap, we
-  designed a functional programming course that  required students to
-  learn by experience with real world applications. In this paper, we present
+  designed a functional programming course that required students to
+  learn by experience in real world applications. In this paper, we present
   the course's design and outline our experience from delivering it.
 
 \end{abstract}
 
-\begin{IEEEkeywords}
-functional programming, teaching
-\end{IEEEkeywords}
+\category{K.3.2}{Computing Milieux}{Computers and Education}[Computer and Information Science Education]
+\category{D.1.1}{Software}{Programming Techniques}[Applicative (Functional) Programming]
+
+\terms{Languages}
+
+\keywords{functional programming, teaching}
 
 \section{Introduction}
 
@@ -42,41 +63,48 @@ Due to a variety of reasons, including the advent of cloud computing, the rising
 rate of information production and the necessity to reach the market fast,
 currently, large corporations and start-ups alike are investigating alternative
 programming and information storage models. As a result, during the last few
-years, the practical software engineering field is witnessing a noticeable shift
-towards functional programming. Scripting languages, notably Javascript and
-Ruby, pioneered the introduction of functional concepts, such as closures and
-lambda functions, to mainstream programming. A new wave of programming
-languages, developed to overcome the expressiveness and complexity limitations
-exhibited in mainstream languages, have promoted functional constructs, such as
-type safe pattern matching, higher order functions and single assignment
-variables, to first class citizens (Scala, {\sc c\#}).  New, functional
-languages have emerged to fill in the remaining gaps (F\#, Clojure, Racket),
-often introducing significant advancements in their field of specialisation
-(such as Erlang in distributed fault-tolerant systems).  Finally, large scale
-information processing systems such as Map/Reduce~\cite{Dean04} and domain
-specific languages such as {\sc linq} have integrated functional concepts to
-ease the expression of masively parallel computations.
+years, the leading edge of practical software engineering field is witnessing a
+slight but noticeable shift towards functional programming ({\sc
+fp}).\footnote{See, for example, the reactive manifesto:
+\href{http://www.reactivemanifesto.org/}{http://www.reactivemanifesto.org/}}
+Scripting languages, notably Javascript and Ruby, pioneered the introduction of
+functional concepts, such as closures and lambda functions, to mainstream
+programming. A new wave of programming languages, developed to overcome the
+expressiveness and complexity limitations exhibited in mainstream languages,
+have promoted functional constructs, such as type safe pattern matching, higher
+order functions and single assignment variables, to first class citizens (Scala,
+{\sc c\#}).  New, functional languages have emerged to fill in the remaining
+gaps (F\#, Clojure, Racket), often introducing significant advancements in their
+field of specialisation (such as Erlang in distributed fault-tolerant systems).
+Finally, large scale information processing systems such as
+Map/Reduce~\cite{Dean04} and reactive programming~\cite{Meije12} and domain
+specific languages such as {\sc linq}~\cite{Meije11} have integrated functional
+concepts to ease the expression of massively parallel computations.
 
-Broadly speaking, functional programming is a style of programming in which the
-primary method of computation is the application of functions to arguments.
-Among other features, functional languages offer a compact notation for writing
-programs, powerful abstraction methods for structuring them, and a simple
-mathematical basis that supports reasoning. Many of the advanced techniques in
-modern functional languages, such as monads and catamorphisms, are closely based
-on principles from category theory such as functors, initial algebras, monads
-and Kleisli categories.
+Strictly speaking, {\sc fp} is a style of programming in which the primary
+method of computation is the application of functions to arguments.  Among other
+features, functional languages offer a compact notation for writing programs,
+powerful abstraction methods for structuring them, and a simple mathematical
+basis that supports reasoning. Many of the advanced techniques in modern
+functional languages, such as monads~\cite{Wadle93} and
+catamorphisms~\cite{Meije91}, are closely based on principles from category
+theory such as functors, initial algebras, monads and Kleisli categories.
 
-While functional programming has been taught for long in computer science
-departments~\cite{Joost93}, curricula tend to emphasize functional programming
-theory rather than practical applications. Special programming languages are
-used to teach functional programming specific concepts, while little connection
-is made to how those concepts can be transfered to non-functional languages.
-The course at TU Delft attempted to teach functional programming principles in the
-classroom and then expect students to apply those concepts in the (non-purely
-functional) language of their choice. The course had a very strong teaching by
-example focus: students were expected to participate in both in-classroom
-exercises, homework assignments and implement a real world system as a final
-project.
+While {\sc fp} has been taught for long in computer science
+departments~\cite{Joost93}, curricula tend to emphasize {\sc fp} theory rather than practical applications. Special programming languages are
+used to teach {\sc fp} specific concepts, while little connection
+is made to how those concepts can be transfered to solving practical software
+engineering problems.
+
+The presented course runs at TU Delft for two consecutive years. Our goal, and
+the course's moto, is to teach students to  ``think like ({\sc fp})
+fundamentalists and code like hackers''. The method we follow is teaching
+{\sc fp} principles in the classroom and then expecting students
+to apply those concepts in challenging practical projects. The course has a very
+strong teaching by example focus: students are expected to participate in both
+in-classroom exercises, homework assignments and implement a real world system
+as a final project, all within a half-semester (6 -- 8 weeks). 
+
 
 \section{Challenges}
 
@@ -85,46 +113,45 @@ to the course's organization and content.
 
 \subsection{Heterogeneous background of participants}
 
-The functional programming course is elective at the MSc level. Students
-from all departments in the Electrical Engineering, Mathematics and Computer
-science faculty are allowed to participate. For practical reasons, the
-enrollment to the course was limited to 15 participants. This permitted
-us to get to know the students individually and to provide them with
-personalized support.
+The {\sc fp} course is elective at the MSc level. Students from
+all departments in the Electrical Engineering, Mathematics and Computer science
+faculty are allowed to participate. In the first year, we restricted the
+enrollment to the course to 15 participants; we lifted this
+restriction during the second year, as we found that the format could allow for
+more students to participate.
 
-From the students that enrolled, most have received formal introduction to
+From the students that enroll, most have received formal introduction to
 imperative and object oriented programming in their bachelors curriculum, while
-through participation to other courses they had limited exposure to functional
-programming (i.e. Map/Reduce in the web information systems
-course). Two of the students were majoring in computer engineering, which meant
-that their programming experience was restricted. Several students also had work
-experience as programmers as part of their industrial placement or through
-participation to start up ventures.
+through participation to other courses they had limited exposure to {\sc fp}
+(i.e. Map/Reduce in the Web Information Systems course). Some students are
+majoring in computer engineering, which meant that their programming experience
+was more restricted. Most students also have work experience as programmers as
+part of their industrial placement or through participation to start up
+ventures.
 
-The diverse backgrounds of the students guaranteed that no generic
+The diverse backgrounds of the students guarantees that no ge\-ne\-ric
 introduction to the topic would be sufficient. For this reason, we decided
 to adopt a hands-on-first approach; the students would have to learn by
-flexing their programming muscles, instead of being introduced to 
-the theory through toy examples.
+flexing their programming muscles, instead of being gently introduced to 
+the theory through toy examples. During the lectures, we made clear to the
+students that it is the delta in learning that we expect them to
+demonstrate rather than impressive technical achievements.
 
 \subsection{Choosing the appropriate topics}
 
-Functional programming is arguably one of the oldest programming paradigms. In it is
-purest form, it is based on a minimalistic theoretical background
-($\lambda$-calculus). Relatively recent
-formulations~\cite{Meije91, Wadle93} also introduced concepts from category
-theory. While the every day use of functional programming does not necessarily
-require the programmer to be aware of the theory, understanding it usually leads
-to more elegant algorithmic solutions. Functional programming teaching is also
-associated with advanced type systems; indeed, the flagship functional
-programming languages (Haskell and the {\sc ml} family) both offer very
-sophisticated support for types. Consequently, teaching the full spectrum of
-functional programming theory and techniques would have been impossible in a
-half-semester course; instead we decided to focus on practical aspects of data
-processing, transformations and state representation using functional
-techniques.
+{\sc fp} is arguably one of the oldest programming paradigms. In
+it is purest form, it is based on a minimalistic theoretical background
+($\lambda$-calculus). Relatively recent formulations~\cite{Meije91, Wadle93}
+also introduced concepts from category theory. While the every day use of
+{\sc fp} does not necessarily require the programmer to be aware
+of the theory, understanding it usually leads to more elegant algorithmic
+solutions. Teaching {\sc fp} is also associated with advanced type
+systems; indeed, the flagship {\sc fp} languages (Haskell, Scala) both offer very sophisticated support for types. Consequently,
+teaching the full spectrum of {\sc fp} theory and techniques is impossible in a half-semester course; instead we focus on
+practical aspects of data processing, transformations and state representation
+using functional techniques.
 
-\subsection{Choosing the appropriate programming language}
+\subsection{Choosing a programming lan\-guage}
 
 Programming languages, in addition to enabling the programmer to express a
 series of instructions to be executed by a computer, affect the programmer's
@@ -134,29 +161,26 @@ be able to demonstrate concepts without interference by the chosen language's
 syntax. However, a non-practical language might have the opposite effect; our
 experience has shown that the further a demonstration language is from practical
 application, the less important students feel the taught concepts are.
-Fortunately, most functional programming concepts can be expressed cleanly by
-several widespread languages: for example, Javascript, Ruby and {\sc c\#} have
+Fortunately, most {\sc fp} concepts can be expressed cleanly by
+several widespread languages: for example, Ja\-va\-script, Ruby and {\sc c\#} have
 closures, first class and higher order functions, while a number of emerging
 languages, such as Scala, Racket, {\sc f\#} and Clojure are functional languages
 implemented on familiar development platforms. Apart from staying compatible
 with the existing literature, there is no practical reason that necessitates
-teaching strictly in a language like Haskell or {\sc ml}.
+teaching in a strict {\sc fp} language like Haskell or {\sc ml}.
 
 The above led us to not choose any particular language for the course.  During
-the lectures, the demonstration languages where Haskell and {\sc c\#}, while at
-the labs we used Scala. We actively encouraged students to use the language of
+the lectures, the demonstration languages where Haskell, {\sc c\#} and {\sc php}, while at the labs we used Scala. We actively encouraged students to use the language of
 their choice on the platform of their choice to carry out homework assignments
 and the course's final project.
 
 \section{The Course}
 
-The high level goal of the course was to teach the principles of functional
-programming, and the corresponding Category theoretical principles. 
-More specifically, the educational purposes of the course were:
+The high level goal of the course was to teach the principles of {\sc fp}, and the corresponding Category theoretical principles. More specifically, the educational purposes of the course were:
 
 \begin{itemize}
 
-  \item To introduce students to basic functional programming concepts,
+  \item To introduce students to basic {\sc fp} concepts,
     higher order functions, monads and advanced type systems.
 
   \item To introduce students to the approach of expressing data processing
@@ -167,14 +191,13 @@ More specifically, the educational purposes of the course were:
 
 \end{itemize}
 
-The course consisted of a series of lectures, of which two where invited
-lectures by an external instructor, and laboratory sessions. In total, the
-course consisted of 14 hours of lectures and 8 hours of lab work.
+The course consists of a series of lectures. In total, the
+course consisted of 15 hours of lectures. 
 The students
-also had to carry out a series of homework assignments and a final project.
-The evaluation would be based on student performance on the final assignment. 
-The lectures took place in a quarter (half semester), during 3 intense 
-weeks; the students had another 6 weeks to finish their final projects.
+also have to carry out a series of optional homework assignments and a final project.
+The evaluation is based on student performance on the final assignment. 
+The lectures take place in a quarter (half semester), during 6 intense 
+weeks; the students have another 2-3 weeks to finish their final projects.
 
 \subsection{Lectures}
 
@@ -210,106 +233,118 @@ projects to work on. The projects included:
 
 \begin{itemize}
 
-  \item Real time graph visualisation on steaming data. The
-    particular example that students worked on was visualizing community
-    structures for Github projects.
+  \item Real time graph visualisation on steaming data.
 
-  \item Multi-source real time data processing. Students worked on a 
-    programming language popularity index, based on data from the Github
-    event stream and the StackOverflow tag cloud {\sc api}.
+  \item Haskell constructs (e.g. the Prelude or abstract data types) in Javascript or even {\sc php}. 
 
-  \item Implementation of Haskell constructs in Javascript. Students implemented
-    the Haskell Prelude (basic functions for list manipulation).
+  \item Interpreters and byte code converters between languages.
 
-  \item Implementation of Map/Reduce algorithms in Haskell. Students installed
-    and configured cloud Haskell and implemented simple Map/Reduce based
-    algorithms in a distributed setting.
+  \item Simple constraint solvers and machine learning algorithms.
 
-  \item Implementation of simple constraint solvers.
-  
-  \item Machine learning algorithms. Students implemented Na\"ive Bayes 
-    classifiers and K-means clustering algorithms.
+  \item Asynchronous request processing in network servers
 
 \end{itemize}
 
-To counterbalance the differences in student experience level, 
-the assignments were open ended; students could drive their projects as
-far as they where willing to.
-The deliverables for the assignments were a repository
-with the source code and short report describing the solution that the
-students came up with. The students were also required to present a working
-demo by the end of the course time. 
+To counterbalance the differences in student experience level, the assignments
+are open ended; students can drive their projects as far as they are willing to,
+as long as the experience is pleasant enough to allow them to learn. The deliverables for the
+assignments are a repository with the source code and short report describing
+the solution that the students came up with. The students are also required to
+present a working demo by the end of the course time. 
 
 \subsection{Labs}
 
-The purpose of the lab sessions where to help students carry out their final
-assignments and further explain concepts that might not be clear to students. 
-Students convened every week, presented their progress and discussed with 
-each other and with the lab demonstrator design and practical issues that
-arised in the implementation of their projects. To further motivate students
-to work on their projects, one of the lab sessions was converted to a full
-day coding sprint.
+In the first year it was offered, the course included lab sessions.  The purpose
+of the lab sessions were to help students carry out their final assignments and
+further explain concepts that might not be clear to them.  Students convened
+every week, presented their progress and discussed with each other and with the
+lab demonstrator design and practical issues that hindered the implementation of
+their projects. To further motivate students to work on their projects, one of
+the lab sessions was converted to a full day coding sprint. However, we found
+out that participation was diminishing and the sessions were not of much interest to the students,
+who preferred to have more time to work on the projects. We therefore canceled
+the lab sessions in the course's second year. 
+
+\subsection{Organizing the work}
+
+The higher number of students in the second year of the project made the
+organization of student work challenging. To better organize and observe the
+student's work, we made active use of Github. Github is a code hosting site that
+includes social networking features (such as notifications on events, following
+of projects etc) and a dashboard to observe them. We created an organization for
+the course\footnote{\href{https://github.com/organizations/fptudelft}{https://github.com/organizations/fptudelft}} and in it we
+created repositories for the projects shared among all students registered on
+the course. We also created a specialized repository for answering general
+questions about the course, using the repository's issue tracking facility.
+
+Github's notification functionality enabled us and the teaching assistants to
+answer questions about the student projects in almost real time. We could also
+observe work done by the students while it was done and this allowed us to
+formulate an early opinion on their progress. We then informally discussed this with the students during idle time (e.g. lecture breaks), giving two types of feedback: praise to students who were doing good, help and support to students that were struggling. 
 
 \section{Experiences}
 
 \subsection{Teaching by example}
 
-The focus of teaching was to present functional programming from a practical
+The focus of teaching was to present {\sc fp} from a practical
 aspect; we were mostly interested to teach students what they can do rather than
 the theory behind functional constructs. An important distinction that was made
-early on was that the world is imperative; therefore while functional
-programming can be a great tool for thinking about a problem, a pure functional
+early on was that the world is imperative; therefore while {\sc fp} 
+ can be a great tool for thinking about a problem, a pure functional
 solutions cannot reflect on the real world. As a consequence, it is usually best
 to mix programming paradigms, i.e. imperative or object-oriented programming for
-state representation and functional programming for data processing. In our
+state representation and {\sc fp} for data processing. In our
 experience, this distinction helped students understand that they are already
-doing functional programming without noticing; enforcing data immutability to
+doing {\sc fp} without noticing; enforcing data immutability to
 handle multi-threading problems or passing function arguments in scripting
-languages are applications of functional programming principles. The moment
-students realized this fact, their attention was captured to the lectures.
+languages are applications of {\sc fp} principles. The moment
+students realized this, their attention was captured to the lectures.
 
 During both lectures and labs, all non-whiteboard examples where actually
-entered in a real programming environment (LinqPad or the Scala command line
-read-evaluate loop) and the results of the evaluation where discussed with the
-students. Participation was encouraged by modifying the examples and asking the
-students to perform the evaluation, before the example was executed. The
-examples varied from list manipulation with higher-order functions to 
-a toy actor model example.
+entered in a real programming environment (LinqPad in {\sc c\#} or the Scala
+command line read-evaluate loop) and the results of the evaluation where
+discussed with the students. Participation was encouraged by modifying the
+examples and asking the students to perform the evaluation, before the example
+was executed.
+The examples varied from list manipulation with higher-order
+functions to a toy actor model example.
+Moreover, we made extensive use of the whiteboard to demonstrate abstract
+concepts like type inference and combinators. Typically, we would
+write a function signature in Haskell and then expected students to come up 
+with its implementation and vice versa.
 
-The proverbial ``six ways to understand monads'' included presentations of the
-formal theoretical concepts, visualizations of monads as blenders (based on the
-monadic property that once a value is captured, it is then contained),
-applications in Haskell for encapsulating state (through the \textsf{Maybe}
-monad), applications to generic programming in {\sc c\#}, applications to {\sc
-linq} and the reactive extensions frameworks, and, finally, a whiteboard
-exercise where students were prompted to participate in the ad-hoc specification
-of Haskell's \textsf{IO} monad from basic principles. Once again, the examples
-enabled the students to understand the composition and state containment
-properties of an otherwise difficult to comprehend theoretical concept.
+Of particular interest to the students was the presentation of monads. The
+students were teased that they will learn monads in no less than 6 different
+ways. Those included presentations of the formal theoretical concepts,
+visualizations of monads as blenders (based on the monadic property that once a
+value is captured, it is then contained), applications in Haskell for
+encapsulating state (through the \textsf{Maybe} monad), applications to generic
+programming in {\sc c\#}, applications to {\sc linq} and the reactive extensions
+frameworks, and, finally, a whiteboard exercise where students were prompted to
+participate in the ad-hoc specification of Haskell's \textsf{IO} monad from
+basic principles. Once again, the examples enabled the students to understand
+the composition and state containment properties of an otherwise difficult to
+comprehend theoretical concept.
 
 \subsection{The teapot exercise}
 
 \begin{figure*}
 \centering
 \label{fig:teapots}
-\subfigure[Input drawing, rendered with Java graphics]{
-\includegraphics[scale=0.173]{teapot-reference.png}
+\subfigure[Input model]{
+\includegraphics[scale=0.14]{reference.png}
 \label{fig:teapot-reference}
 }
-\subfigure[Decomposition in Scala, rendered with Java graphics]{
-\includegraphics[scale=0.17]{teapot-java-canvas.png}
+\subfigure[Decomposed model]{
+\includegraphics[scale=0.20]{decomposed.png}
 \label{fig:teapot-scala}
 }
-\subfigure[Decomposition in Scheme, rendered with appropriately positioned {\sc html} \textsf{div}
-elements]{
-\includegraphics[scale=0.195]{teapot-html-divs.png}
-\label{fig:teapot-html-divs}
+\subfigure[Detail: The teapot's handle]{
+\includegraphics[scale=0.20]{detail.png}
+\label{fig:teapot-scala}
 }
-\subfigure[Decomposition in Javascript, rendered with {\sc html5} graphics]{
-\includegraphics[scale=0.295]{teapot-html-canvas.png}
-\label{fig:teapot-html-canvas}
-}
-\caption[]{Example results from the teapot exercise.}
+
+\caption[]{The teapot input and decomposition results}
 
 \vspace{-1.5em}
 \end{figure*}
@@ -320,43 +355,50 @@ facts:
 
 \begin{itemize}
 
-  \item Most modern programming languages can express functional programming
-    constructs.
+  \item Most modern programming languages can express {\sc fp} constructs.
 
-  \item Functional programming works best in data transformation scenarios.
+  \item {\sc fp} works best in data transformation scenarios.
 
   \item Complex problems can be solved by decomposing them into smaller and simpler ones.
 
 \end{itemize}
 
-The exercise consisted of rendering the Utah Teapot~\cite{Torre06} using any
-graphics primitive of the student's choice using only right triangles (with one
-horizontal leg).  In its
-core, the exercise required students to decompose a collection of arbitrary triangles, which
-comprised the input Utah Teapot model, to a collection of right triangles. The students
-had to come up with the decomposition method (using some simple analytic
-geometry, this was not a course on 3D graphics), a decomposition termination criterion to stop the decomposition when
-triangles were too small to be rendered on screen and a method to recursively
-apply the above mentioned transformations on the input data. As always, the
-students could decide the implementation language of their choice. The exercise
-was given as a mid-week homework assignment, between the Monday and the Friday
-lectures.
+The first time the course was given, the exercise consisted of rendering the
+Utah Teapot~\cite{Torre06} using any graphics primitive of the student's choice
+using only right triangles with one horizontal leg (see
+Figure~\ref{fig:teapots}). In its core, the exercise required students to
+decompose a collection of arbitrary triangles, which comprised the input Utah
+Teapot model, to a collection of right triangles~\cite{Beckm13}. The students
+had to come up with the decomposition method (using analytical geometry), a decomposition termination criterion to
+stop the decomposition when triangles were too small to be rendered on screen
+and a method to recursively apply the above mentioned transformations on the
+input data. As always, the students could decide the implementation language of
+their choice. The exercise was given as a mid-week homework assignment, between
+the Monday and the Friday lectures.
 
-The student's response was overwhelming. Even though it was made clear that the
-exercise would not contribute to the final grade, the will to apply the data
-processing techniques taught during the lectures motivated the students to work
-very hard. The fact that they were instructed to use their favourite language
-enabled them to focus on decomposing the problem in a series of testable
-calculation steps rather than meddling with the intricacies of learning a new 
-language. In spite of the advice, students were eager to test-drive the newly
-acquired knowledge using a functional language; apart from {\sc c\#} and
-Javascript, solutions were also provided in Scala, Scheme and Haskell. Example
-renderings produced by student programs can be seen in Figure~\ref{fig:teapots}.
+During the second run of the course, the exercise was optimizing decomposition
+rather than implementing it. We provided the students with a basic implementation in {\sc php} and asked them to optimize the code by applying new algorithmic techniques and taking into account new language features implemented in a 
+pre-release version of Facebook's {\sc php} language version (codenamed Hack).
+To further motivate them, we converted the exercise to a programming
+contest with prizes for the winning team.
+
+Both times, the students' response was overwhelming. Even though it was made
+clear that the exercise would not contribute to the final grade, the will to
+apply the data processing techniques taught during the lectures motivated the
+students to work very hard. In the first year, the fact that they were
+instructed to use their favourite language enabled them to focus on decomposing
+the problem in a series of testable calculation steps rather than meddling with
+the intricacies of learning a new language. In spite of the advice, students
+were eager to test-drive the newly acquired knowledge using a functional
+language; apart from {\sc c\#} and Javascript, solutions were also provided in
+Scala, Scheme and Haskell. In the second year, the students learned the
+value of clean design and breaking code changes to obtain massive
+optimizations~\cite{Gousi13}.
 
 \subsection{Map/Reduce}
 
 According to many students, the Map/Reduce data analysis framework was what
-drove them to attend the course. The lecture on Map/Reduce featured an invited
+drove them to attend the course. In the first year, the lecture on Map/Reduce featured an invited
 talk by Prof. Ralf L\"ammel, who presented his formulation of Map/Reduce using
 functional programming principles~\cite{Lamme08} and explained how those can be
 applied to process semi-structured data. The talk resonated to students; in
@@ -417,10 +459,9 @@ understand the concepts that were taught during it.
 \section*{Acknowledgements and Availability}
 We would like to thank the course participants for their enthusiasm and
 dedication. The source code to all student projects and the teapot
-exercise can be found at (or linked from) \url{http://swerl.tudelft.nl/bin/view/Main/FunctionalProgrammingCourse}. This work is partially supported by
-Marie Curie {\sc ief} 298930 -- {\sc sefunc}.
+exercise can be found at (or linked from) \href{https://github.com/organizations/fptudelft}{https://\-github.com\-/organizations\-/fptudelft}. This work is partially supported by Marie Curie {\sc ief} 298930 -- {\sc sefunc}.
 
 \bibliography{paper}
-\bibliographystyle{ieeetr}
+\bibliographystyle{abbrv}
 \end{document}
 
